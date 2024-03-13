@@ -34,7 +34,7 @@ ul, ol{
 .pokedex{
 display:flex;
 position:relative;
-box-shadow: whitesmoke 1px 1px 0px,whitesmoke -5px 0px 12px;
+box-shadow: whitesmoke 1px 1px 0px,whitesmoke -5px -10px 30px;
 background-color:#d2063f;
 border-radius: 15px
 }
@@ -476,6 +476,11 @@ font-size: 18px;
 color: #2f3638;
 margin-right: 10px;
 }
+.pikachu_ball_wrap{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 .wrap_pokeball{
   border-radius: 50%;
   overflow: hidden;
@@ -483,13 +488,13 @@ margin-right: 10px;
 }
 @keyframes pokeball{
   0% {
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(-70px) rotate(0deg);
   }
   50% {
-    transform: translateX(210px) rotate(360deg);
+    transform: translateX(70px) rotate(360deg);
   }
   100% {
-    transform: translateX(0px) rotate(720deg);
+    transform: translateX(-70px) rotate(720deg);
   }
 }
 .desc_center_wrap{

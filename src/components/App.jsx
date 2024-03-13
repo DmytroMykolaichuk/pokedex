@@ -5,6 +5,8 @@ import screen from '../img/1.png'
 import defaultPokemon from '../img/default.jpg';
 import pokeball from '../img/pokeball.png';
 import center from '../img/center.jpg';
+import pikachu from '../img/pokemon64.png';
+import bulbasaur from '../img/bulbasaur.png';
 import { AiOutlineCompress } from "react-icons/ai";
 import { GrFingerPrint } from "react-icons/gr";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
@@ -308,9 +310,13 @@ function handleDescription(action){
             <div  className="pokedex_headar_right">
               <div className='field_pokeball'>
               <span className='title_pokedex'>Pokedex</span>
-                <div className='wrap_pokeball '>
-                  <img src={pokeball} alt='pokeball' height='30px' width='30px'/>
-                  </div>
+              <div className='pikachu_ball_wrap'>
+                <img src={pikachu}  alt='pikachu' height='30px' width='30px'/>
+                  <div className='wrap_pokeball '>
+                    <img src={pokeball} alt='pokeball' height='30px' width='30px'/>
+                    </div>
+                  <img src={bulbasaur}  alt='bulbasaur' height='30px' width='30px'/>
+              </div>
               </div>
             </div>
               

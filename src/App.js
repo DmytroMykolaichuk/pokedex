@@ -41,9 +41,7 @@ function App() {
       },[])
       setDescriptions(description)
       } catch (error) {
-        setError(true)
-        setDescriptions([])
-        setIndxDescriptions(0)
+        setDescriptions(['There is no information about this Pokemon'])
         console.log('description')
       }
     }
@@ -80,7 +78,6 @@ useEffect(()=>{
   useEffect(() => {
     if (evolution.length === 0) return;
     async function getEvolutionPokemon() {
-      setError(false)
       try {
         const allEvolPromises = evolution.map(async (pok) => {
           const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pok}`);
@@ -90,6 +87,9 @@ useEffect(()=>{
         setEvolPokemon(allEvol);
       } catch (error) {
         setError(true)
+        setEvolPokemon([])
+        setPokemon(null)
+        setDescriptions([])
         console.log('obj pokemons for evol')
       }
     }
@@ -102,18 +102,17 @@ useEffect(()=>{
       try {
         const {data} =await axios.get(`https://pokeapi.co/api/v2/pokemon/${queryPokemon}`)
         setPokemon(data)
-        // console.log(data)
         const speciesNew =await axios.get(data.species.url)
         setEvolutionQuery(speciesNew.data.evolution_chain.url)
+        if(error)setError(false)
+        if(!offsetType)setOffsetType(0)
       } catch (error) {
         setPokemon(null)
+        setEvolutionQuery('')
         setQuery('')
         setError(true)
         setEvolPokemon([])
-
-        // const [evolutionQuery,setEvolutionQuery]=useState('')
-        // const [evolution,setEvolution]=useState([])
-        // const [evolPokemon,setEvolPokemon]=useState([])
+        setDescriptions([])
         console.log('obj pokemon')
       }
       }
@@ -152,10 +151,11 @@ function handleSubmit(e){
 
 function handleKillPokemon(){
   setQueryPokemon('')
+  setEvolutionQuery('')
   setPokemon(null)
-  // setEvolutionQuery('')
-  // setEvolution([])
+  setDescriptions([])
   setEvolPokemon([])
+  setError(false)
 }  
 function handlChangeType(e){
   const activeType =e.target.value.toLowerCase()
@@ -172,11 +172,9 @@ function handlePokemonOfType(name){
   setQueryPokemon(name)
 }
 function handleKillTypePokemon(){
-  setQueryPokemon('')
-  setPokemon(null)
-  setEvolPokemon([])
   setOffsetType(0)
   setPokemonsOfType([])
+  setQueryType(null)
 }
 
 function handleDescription(action){

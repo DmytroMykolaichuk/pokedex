@@ -1,10 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import screen from './img/1.png'
-import defaultPokemon from './img/default.jpg';
-import pokeball from './img/pokeball.png';
-import center from './img/center.jpg';
+import screen from '../img/1.png'
+import defaultPokemon from '../img/default.jpg';
+import pokeball from '../img/pokeball.png';
+import center from '../img/center.jpg';
 import { AiOutlineCompress } from "react-icons/ai";
 import { GrFingerPrint } from "react-icons/gr";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";

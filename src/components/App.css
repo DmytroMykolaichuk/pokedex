@@ -417,6 +417,7 @@ color: #d2063f;
   color: whitesmoke;
   padding:10px;
   font-size: 10px;
+  cursor: pointer;
 } 
 .btn_next{
   display: flex;
@@ -430,6 +431,7 @@ color: #d2063f;
   color: whitesmoke;
   padding:10px;
   font-size: 10px;
+  cursor: pointer;
 }
 .wrap_type_btn{
   display: flex;

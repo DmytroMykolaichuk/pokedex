@@ -342,12 +342,31 @@ function handleDescription(action){
               </div>
               <div className='desc_wrap flex'>
                 <div className='desc_center_wrap flex'>
-                  <button type='button' id='next' className='togle_desc_btn flex' onClick={()=>handleDescription('next')}><AiOutlineCompress style={{color:'whitesmoke'}} size='30px'/></button>
-                  <button type='button' id='prev' className='togle_desc_btn flex' onClick={()=>handleDescription('prev')}><AiOutlineCompress style={{color:'whitesmoke'}} size='30px'/></button>
+                  <button type='button' className='togle_desc_btn flex' onClick={()=>handleDescription('next')}>
+                    <AiOutlineCompress style={{color:'whitesmoke'}} size='30px'/></button>
+                  <button type='button' className='togle_desc_btn flex' onClick={()=>handleDescription('prev')}>
+                    <AiOutlineCompress style={{color:'whitesmoke'}} size='30px'/></button>
                 </div>
               </div>
+              <ul className='list_decor first_decor_list'>
+              <li className='item_decor' style={{width:'5%'}}></li>
+              <li className='item_decor' style={{width:'10%'}}></li>
+              <li className='item_decor' style={{width:'15%'}}></li>
+              <li className='item_decor' style={{width:'20%'}}></li>
+              <li className='item_decor' style={{width:'25%'}}></li>
+              <li className='item_decor' style={{width:'30%'}}></li>
+              <li className='item_decor' style={{width:'100%'}}></li>
+              </ul>
+              <ul className='list_decor second_decor_list'>
+              <li className='item_decor' style={{width:'5%'}}></li>
+              <li className='item_decor' style={{width:'10%'}}></li>
+              <li className='item_decor' style={{width:'15%'}}></li>
+              <li className='item_decor' style={{width:'20%'}}></li>
+              <li className='item_decor' style={{width:'25%'}}></li>
+              <li className='item_decor' style={{width:'30%'}}></li>
+              <li className='item_decor' style={{width:'100%'}}></li>
+              </ul>
             </div>
-
           </div>
         </main>
       

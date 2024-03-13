@@ -58,6 +58,7 @@ border-radius: 15px
   border-top-left-radius:30px;
   clip-path: polygon(0% 0%, 45% -150%, 75% 85%, 100% 100%, 0% 100%);
   overflow: hidden;
+  box-shadow: whitesmoke -1px -1px 0px
 }
 .pokedex_headar_sensor{
   box-shadow: rgba(255, 255, 255, 0.307)5px 1px 3px inset;
@@ -187,6 +188,7 @@ margin-bottom: 20px;
 width: 100px;
 height: 3px;
 background-color: #000000;
+box-shadow: 0px 1px 1px whitesmoke;
 }
 .wraper_kill_pokemon{
   display: flex;
@@ -199,11 +201,11 @@ background-color: #000000;
   border-radius: 50%;
   background-color: #d2063f ;
   cursor: pointer;
-  box-shadow: 2px 0px 9px whitesmoke;
+  box-shadow: 1px 0px 4px whitesmoke;
   transition: box-shadow 0.3s ease;
 }
 .btn_kill_pokemon:hover {
-  box-shadow: 0px 3px 10px whitesmoke  ;
+  box-shadow: 0px 1px 4px whitesmoke  ;
 }
 .search_form{
   display: flex;
@@ -456,6 +458,7 @@ color: #d2063f;
   border-top-left-radius: 30px;
   clip-path: polygon(0% 0%, 55% -150%, 75% 85%, 0% 100%, 0% 100%);
   padding: 10px 0 0 20px;
+  box-shadow: whitesmoke -1px -1px 0px
 }
 .field_pokeball{
   width: 320px;

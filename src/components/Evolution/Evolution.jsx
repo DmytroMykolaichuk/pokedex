@@ -19,20 +19,24 @@ export function Evolution({evolPokemons,setQueryPokemon}){
                     <div className='wraper_evol_pok flex'>
                         <img src={pokeball} alt='pokeball'width='120px' height='120px'/>
                     </div>
-                    {indx < [1,2,3].length - 1 && <TbPlayerTrackNextFilled size='40px' style={{ color: 'var(--primary-color)' }}/>}
+                    {indx < [1,2,3].length - 1 && 
+                    <TbPlayerTrackNextFilled size='40px' style={{ color: 'var(--primary-color)' }}/>}
                 </div>)}
 
 
-                {evolPokemons.length && evolPokemons.length <= 4 &&
+                {evolPokemons.length!==0 && evolPokemons.length <= 4 &&
                 evolPokemons.map((evolution,indx)=>
                 <div className='evo_item flex' key={evolution.name} onClick={()=>setQueryPokemon(evolution.name)}>
                     <div className='wraper_evol_pok flex' 
-                    style={{width:evolPokemons.length===4?'96px':'120',height:evolPokemons.length===4?'96px':'120'}}>
+                    style={{width:evolPokemons.length===4?'96px':'120px',height:evolPokemons.length===4?'96px':'120px'}}>
                         <img src={evolution.sprites.other.dream_world.front_default || 
                         evolution.sprites.other['official-artwork'].front_default || 
-                        pokeball} alt={evolution.name} width={evolPokemons.length===4?'90px':'100px'} height={evolPokemons.length===4?'90px':'100px'}/>
+                        pokeball} alt={evolution.name} 
+                        width={evolPokemons.length===4?'90px':'100px'} height={evolPokemons.length===4?'90px':'100px'}/>
                     </div>
-                    {indx < evolPokemons.length - 1 &&  <TbPlayerTrackNextFilled size={evolPokemons.length===4?'20px':'40px'} style={{ color: 'var(--primary-color)' }}/>}
+                    {indx < evolPokemons.length - 1 && 
+                    <TbPlayerTrackNextFilled size={evolPokemons.length===4?'20px':'40px'} 
+                    style={{ color: 'var(--primary-color)' }}/>}
                 </div>)}
 
 

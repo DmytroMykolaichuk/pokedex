@@ -1,0 +1,54 @@
+.pokedex_headar_right{
+    width: 500px;
+    height: 50px;
+    position: absolute;
+    top: -30px;
+    left: 0;
+    background-color: #d2063f;
+    border-top-left-radius: 30px;
+    clip-path: polygon(0% 0%, 55% -150%, 75% 85%, 0% 100%, 0% 100%);
+    padding: 10px 0 0 20px;
+    box-shadow: whitesmoke -1px -1px 0px
+}
+
+.field_pokeball{
+    width: 320px;
+    height: 40px;
+    background-color: whitesmoke;
+    background-image: linear-gradient(to right,whitesmoke,#d2063f);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding:0 5px;
+}
+
+.title_pokedex{
+    font-size: 18px;
+    color: #2f3638;
+    margin-right: 10px;
+}
+
+.pikachu_ball_wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wrap_pokeball{
+    border-radius: 50%;
+    overflow: hidden;
+    animation:pokeball 3s ease infinite;
+}
+
+@keyframes pokeball{
+    0% {
+        transform: translateX(-70px) rotate(0deg);
+    }
+    50% {
+        transform: translateX(70px) rotate(360deg);
+    }
+    100% {
+        transform: translateX(-70px) rotate(720deg);
+    }
+}

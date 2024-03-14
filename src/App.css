@@ -4,7 +4,7 @@
 
 .App-main {
   padding-top: 15px;
-  background-color: #282c34;
+  background-color: var(--primary-bgcolor);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,8 +14,8 @@
 
 .pokedex{
 display:flex;
-box-shadow: whitesmoke 1px 1px 0px,whitesmoke -5px -10px 30px;
-background-color:#d2063f;
+box-shadow: var(--secondary-color) 1px 1px 0px,var(--secondary-color) -5px -10px 30px;
+background-color:var(--primary-color);
 border-radius: 15px
 }
 
@@ -30,6 +30,17 @@ border-radius: 15px
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
   padding: 30px 20px 20px 20px;
+}
+
+.monitor_right{
+  border-radius: 15px;
+  padding: 5px 10px;
+  width: 460px;
+  height: 155px;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+  background-color: var(--primary-bgcolor);
+  box-shadow: -2px -2px 6px var(--secondary-color) inset;
 }
 
 .psychic{
@@ -92,191 +103,3 @@ border-radius: 15px
 .normal{
   background-color: grey;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.monitor_right{
-  border-radius: 15px;
-  padding: 5px 10px;
-width: 460px;
-height: 155px;
-margin-bottom: 10px;
-color: whitesmoke;
-background-color: #2f3638;
-box-shadow: -2px -2px 6px whitesmoke inset;
-}
-.list_type{
-  flex-wrap: wrap;
-  width: 400px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  box-shadow: -2px -2px 6px whitesmoke;
-}
-.item_type{
-  flex-basis: calc(100% /5);
-}
-.btn_type{
-  color: whitesmoke;
-  width: 80px;
-  padding: 3px ;
-  background-color: #2f3638;
-  cursor: pointer;
-}
-
-.list_pok{
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 3px;
-}
-.item_pok{
-flex-basis: calc(100% /5);
-}
-.pokemon_of_type{
-  color: whitesmoke;
-  cursor:pointer;
-}
-.pokemon_of_type:hover{
-color: #d2063f;
-}
-
-.container_btn_page{
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-.btn_prev{
-  display: flex;
-  justify-content: flex-end;
-  align-content: flex-start;
-  width: 90px;
-  height: 40px;
-  clip-path: polygon(0% 0%, 0% 0%, 100% -100%, 140% 136%, 0% 15%);
-  box-shadow: -2px -2px 6px whitesmoke;
-  background-color:#2f3638;
-  color: whitesmoke;
-  padding:10px;
-  font-size: 10px;
-  cursor: pointer;
-} 
-.btn_next{
-  display: flex;
-  justify-content: flex-start;
-  align-content: flex-end;
-  width: 90px;
-  height: 40px;
-  clip-path: polygon(0% 0%, 0% 0%, 100% -100%, 140% -19%, 0% 100%);
-  background-color:#2f3638;
-  box-shadow: -2px -2px 6px whitesmoke;
-  color: whitesmoke;
-  padding:10px;
-  font-size: 10px;
-  cursor: pointer;
-}
-.wrap_type_btn{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.container_kil_type{
-  border-radius: 15px;
-  box-shadow: -2px -2px 6px whitesmoke;
-  width: 120px;
-  height: 50px;
-  background-color: #2f3638;
-}   
-.pokedex_headar_right{
-  width: 500px;
-  height: 50px;
-  position: absolute;
-  top: -30px;
-  left: 0;
-  background-color: #d2063f;
-  border-top-left-radius: 30px;
-  clip-path: polygon(0% 0%, 55% -150%, 75% 85%, 0% 100%, 0% 100%);
-  padding: 10px 0 0 20px;
-  box-shadow: whitesmoke -1px -1px 0px
-}
-.field_pokeball{
-  width: 320px;
-  height: 40px;
-  background-color: whitesmoke;
-  background-image: linear-gradient(to right,whitesmoke,#d2063f);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding:0 5px;
-}
-.title_pokedex{
-font-size: 18px;
-color: #2f3638;
-margin-right: 10px;
-}
-.pikachu_ball_wrap{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.wrap_pokeball{
-  border-radius: 50%;
-  overflow: hidden;
-  animation:pokeball 3s ease infinite;
-}
-@keyframes pokeball{
-  0% {
-    transform: translateX(-70px) rotate(0deg);
-  }
-  50% {
-    transform: translateX(70px) rotate(360deg);
-  }
-  100% {
-    transform: translateX(-70px) rotate(720deg);
-  }
-}
-.desc_center_wrap{
-  padding: 5px 20px;
-  border-radius: 30px;
-  overflow: hidden;
-  gap: 40px;
-  background-color: whitesmoke;
-}
-.togle_desc_btn{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #2f3638 ;
-  cursor: pointer;
-  box-shadow: 4px 2px 4px #2f3638;
-  transition: transform 0.3s ease;
-}
-.togle_desc_btn:hover {
-  transform: scale(0.95);
-}
-

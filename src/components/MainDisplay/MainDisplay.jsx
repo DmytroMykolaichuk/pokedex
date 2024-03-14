@@ -4,7 +4,7 @@ import { refactorName } from 'util/refactorName';
 import { GrFingerPrint } from "react-icons/gr";
 import { AiOutlineCompress } from "react-icons/ai";
 import unknownPokemon from '../../img/default.jpg';
-import screen from '../../img/1.png'
+import screen from '../../img/1.png';
 
 
 export function MainDisplay({pokemon,error,handleKillPokemon,handleSubmit}){

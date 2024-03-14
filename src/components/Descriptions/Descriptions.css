@@ -1,0 +1,21 @@
+.desc_center_wrap{
+    padding: 5px 20px;
+    border-radius: 30px;
+    overflow: hidden;
+    gap: 40px;
+    background-color: var(--secondary-color);
+}
+
+.togle_desc_btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-bgcolor) ;
+    cursor: pointer;
+    box-shadow: 4px 2px 4px var(--primary-bgcolor);
+    transition: transform 0.3s ease;
+}
+
+.togle_desc_btn:hover {
+    transform: scale(0.95);
+}

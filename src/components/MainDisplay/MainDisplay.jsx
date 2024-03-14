@@ -97,7 +97,7 @@ export function MainDisplay({pokemon,error,handleKillPokemon,handleSubmit}){
         <form className='search_form' onSubmit={onSubmit}>
             <label className='search_label'>
                 <input className='search_input' name='hero' value={query} 
-                onChange={(e)=>setQuery(e.target.value)} placeholder='enter name pokemon or number to 1025'></input>
+                onChange={(e)=>setQuery(e.target.value)} placeholder='enter name pokemon or number to 1025, example "133"'></input>
             </label>
             <button className='search_btn' type='submit'><GrFingerPrint size='30px'/></button>
         </form>

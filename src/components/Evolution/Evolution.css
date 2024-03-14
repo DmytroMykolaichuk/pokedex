@@ -1,0 +1,79 @@
+.many_evol{
+display: flex;
+justify-content:  space-between;
+width: 100%;
+}
+
+.all_of_many_evol{
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.evo_item,
+.first_of_many_evol{
+    gap: 2px;
+}
+
+.many_evo_item{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    cursor: pointer;
+    /* flex-basis: calc(100% / 4); */
+}
+
+.wraper_evol_pok:hover img,
+.many_evo_item:hover img{
+    transform: scale(0.9);
+}
+
+.wraper_evol_pok{
+    width: 120px;
+    height: 120px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 300ms linear;
+}
+
+.many_wraper_evol_pok{
+    width: 57px;
+    height: 57px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.container_evolutions{
+    margin-top: 10px;
+    }
+
+.evolutions{
+    display: block;
+    width: 160px;
+    text-align: left;
+    background-color: var(--primary-bgcolor);
+    color: var(--secondary-color);
+    box-shadow: 2px -2px 2px var(--secondary-color);
+    padding-left: 10px;
+    padding-top: 2px;
+    font-size: 12px;
+    clip-path:polygon(0% 0%, 55% -125%, 70% 100%, 0% 100%, 0% 100%)
+}
+
+.evolutions_panel{
+    background-color: var(--primary-bgcolor);
+    width: 480px;
+    height: 130px;
+    padding: 5px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0px 2px 0px var(--secondary-color);
+    gap: 10px;
+}

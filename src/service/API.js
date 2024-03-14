@@ -39,8 +39,8 @@ async function getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescr
 
       }else{
         evol.push(chain.species.name)
-        const newEvol = chain.evolves_to.map(el=>el.species.name)
-        getEvolutionPokemons([...evol,newEvol[0],newEvol[1]],setEvolPokemons)
+        chain.evolves_to.forEach(el=>evol.push(el.species.name))
+        getEvolutionPokemons([...evol],setEvolPokemons)
       }
     } catch (error) {
       console.log('evolution name arr')

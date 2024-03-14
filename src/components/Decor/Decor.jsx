@@ -1,5 +1,5 @@
 import css from './Decor.module.css';
-console.log(css.list_decor)
+
 export const Decor = () => {
     return(
         <>

@@ -1,183 +1,92 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import screen from '../img/1.png'
-import defaultPokemon from '../img/default.jpg';
-import pokeball from '../img/pokeball.png';
-import center from '../img/center.jpg';
-import pikachu from '../img/pokemon64.png';
-import bulbasaur from '../img/bulbasaur.png';
+import API from 'service/API';
+import screen from './img/1.png'
+import defaultPokemon from './img/default.jpg';
+import pokeball from './img/pokeball.png';
+import center from './img/center.jpg';
+import pikachu from './img/pokemon64.png';
+import bulbasaur from './img/bulbasaur.png';
 import { AiOutlineCompress } from "react-icons/ai";
 import { GrFingerPrint } from "react-icons/gr";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
+import { Decor } from 'components/Decor';
+
+
 
 function App() {
   const [query,setQuery]=useState('')
+  
   const [queryPokemon,setQueryPokemon]=useState('')
   const [pokemon,setPokemon]=useState(null)
 
   const [descriptions,setDescriptions]=useState([])
   const[indxDescriptions,setIndxDescriptions]=useState(0)
 
-  const [evolutionQuery,setEvolutionQuery]=useState('')
-  const [evolution,setEvolution]=useState([])
-  const [evolPokemon,setEvolPokemon]=useState([])
+  const [evolPokemons,setEvolPokemons]=useState([])
 
   const [types,setTypes]=useState([])
-  const [queryType,setQueryType]=useState(null)
+
+  const [selectedType,setSelectedType]=useState(null)
   const [pokemonsOfType,setPokemonsOfType]=useState([])
   const [offsetType,setOffsetType]=useState(0)
 
   const[error,setError]=useState(false)
 
-  useEffect(()=>{
-    if(!queryPokemon)return
-    async function getPokemonsDiscription(){
-      try {
-        const {data:{flavor_text_entries}}=await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${queryPokemon}`)
-      const description=flavor_text_entries.reduce((acc,desc)=>{
-        if(desc.language.name==='en' && !acc.includes(desc.flavor_text)){
-          acc.push(desc.flavor_text)
-        }
-        return acc;
-      },[])
-      setDescriptions(description)
-      } catch (error) {
-        setDescriptions(['There is no information about this Pokemon'])
-        console.log('description')
-      }
-    }
-    getPokemonsDiscription()
-  },[queryPokemon])
-
-useEffect(()=>{
-  if(!queryType)return
-  async function getTypePokemon(){
-    try {
-      const {data:{pokemon}} = await axios.get(queryType.url)
-    setPokemonsOfType(pokemon)
-    } catch (error) {
-      setError(true)
-      console.log('arr evol')
-    }
-  }
-  getTypePokemon()
-},[queryType])
-
-  useEffect(()=>{
-    async function getTypes() {
-      try {
-        const {data:{results}}= await axios.get('https://pokeapi.co/api/v2/type/')
-        setTypes(results)
-      } catch (error) {
-        setError(true)
-        console.log('start types')
-      }
-    }
-    getTypes()
-  },[])
-
-  useEffect(() => {
-    if (evolution.length === 0) return;
-    async function getEvolutionPokemon() {
-      try {
-        const allEvolPromises = evolution.map(async (pok) => {
-          const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pok}`);
-          return data;
-        });
-        const allEvol = await Promise.all(allEvolPromises);
-        setEvolPokemon(allEvol);
-      } catch (error) {
-        setError(true)
-        setEvolPokemon([])
-        setPokemon(null)
-        setDescriptions([])
-        console.log('obj pokemons for evol')
-      }
-    }
-    getEvolutionPokemon();
-  }, [evolution]);
-
   useEffect(() =>{
     if(!queryPokemon)return;
-    async function getPokemn(){
-      try {
-        const {data} =await axios.get(`https://pokeapi.co/api/v2/pokemon/${queryPokemon}`)
-        setPokemon(data)
-        const speciesNew =await axios.get(data.species.url)
-        setEvolutionQuery(speciesNew.data.evolution_chain.url)
-        if(error)setError(false)
-        if(!offsetType)setOffsetType(0)
-      } catch (error) {
-        setPokemon(null)
-        setEvolutionQuery('')
-        setQuery('')
-        setError(true)
-        setEvolPokemon([])
-        setDescriptions([])
-        console.log('obj pokemon')
-      }
-      }
-    getPokemn();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[queryPokemon])
+
+    API.getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescriptions,setError)
+
+  },[error, queryPokemon])
+
+
+useEffect(()=>{
+  if(!selectedType)return
+
+  API.getTypePokemons(selectedType,setPokemonsOfType)
+
+},[selectedType])
+
 
   useEffect(()=>{
-    if(!evolutionQuery)return;
-    async function getEvolution(){
-      try {
-        const {data:{chain}} = await axios.get(evolutionQuery)
-        if(chain.evolves_to.length <= 1){
-          const evol=[]
-          evol.push(chain.species.name)
-          chain?.evolves_to[0]?.species?.name && evol.push(chain.evolves_to[0].species.name)
-          chain?.evolves_to[0]?.evolves_to[0]?.species?.name && evol.push(chain.evolves_to[0].evolves_to[0].species.name)
-          setEvolution(evol)
-        }else{
-          const zeroEvol=chain.species.name
-          const newEvol = chain.evolves_to.map(el=>el.species.name)
-          setEvolution([zeroEvol,newEvol[0],newEvol[1]])
-        }
-      } catch (error) {
-        setEvolPokemon([])
-        setError(true)
-        console.log('evolution arr')
-      }
-  }
-  getEvolution()
-  },[evolutionQuery])
+
+    API.getALLTypes(setTypes)
+
+  },[])
+
 
 function handleSubmit(e){
     e.preventDefault()
     setQueryPokemon(e.target.hero.value.trim().toLowerCase())
+    setQuery('')
   }
 
 function handleKillPokemon(){
   setQueryPokemon('')
-  setEvolutionQuery('')
   setPokemon(null)
   setDescriptions([])
-  setEvolPokemon([])
+  setEvolPokemons([])
   setError(false)
-}  
+}
+
 function handlChangeType(e){
   const activeType =e.target.value.toLowerCase()
-  setQueryType(types.find(({name})=>name===activeType))
+  setSelectedType(types.find(({name})=>name===activeType))
   setOffsetType(0)
 }
+
 function handlePrevType(){
   setOffsetType(offsetType - 12 > 0 ? offsetType-12:0)
 }
 function handleNextType(){
   setOffsetType(pokemonsOfType.length>offsetType+12?offsetType+12:pokemonsOfType.length-12)
 }
-function handlePokemonOfType(name){
-  setQueryPokemon(name)
-}
+
 function handleKillTypePokemon(){
   setOffsetType(0)
   setPokemonsOfType([])
-  setQueryType(null)
+  setSelectedType(null)
 }
 
 function handleDescription(action){
@@ -193,6 +102,7 @@ function handleDescription(action){
       return;
 }
 }
+
   return (
     <div className="App">
       <header></header>
@@ -274,12 +184,12 @@ function handleDescription(action){
                   <div>
                     <div className='container_pok_evol flex'>
                     {
-                    evolPokemon.length>0?
-                    evolPokemon.map((evolution,indx)=><div className='evo_item flex' key={evolution.name} onClick={()=>setQueryPokemon(evolution.name)}>
+                    evolPokemons.length>0?
+                    evolPokemons.map((evolution,indx)=><div className='evo_item flex' key={evolution.name} onClick={()=>setQueryPokemon(evolution.name)}>
                       <div className='wraper_evol_pok flex'>
                         <img src={evolution.sprites.other.dream_world.front_default || evolution.sprites.other['official-artwork'].front_default || defaultPokemon} alt={evolution.name} width='100px' height='100px'/>
                         </div>
-                        {indx < evolPokemon.length - 1 && 
+                        {indx < evolPokemons.length - 1 && 
                         <div style={{ color: '#e53b3b' }}>
                         <TbPlayerTrackNextFilled size='40px' />
                       </div>}
@@ -325,14 +235,14 @@ function handleDescription(action){
               <div className='monitor_right flex'>
                 <ul className='list_pok flex'>
                 {pokemonsOfType.slice(offsetType, offsetType+12).map(({pokemon:{name}})=><li key={name}  className='item_pok'>
-                    <span type='button' className='pokemon_of_type' onClick={()=>handlePokemonOfType(name)}>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+                    <span type='button' className='pokemon_of_type' onClick={()=>setQueryPokemon(name)}>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
                     </li>
                 )}
                 </ul>
               </div>
               
               <ul className='list_type flex'>
-              {types.map(({name,url})=><li key={name}  className='item_type'><input type='button' onClick={handlChangeType} value={name.charAt(0).toUpperCase() + name.slice(1)} className={`btn_type ${queryType && queryType.name === name && name}`} /></li>)}
+              {types.map(({name,url})=><li key={name}  className='item_type'><input type='button' onClick={handlChangeType} value={name.charAt(0).toUpperCase() + name.slice(1)} className={`btn_type ${selectedType && selectedType.name === name && name}`} /></li>)}
               </ul>
               <div className='wrap_type_btn'>
               <div className='container_kil_type flex'>
@@ -354,24 +264,7 @@ function handleDescription(action){
                     <AiOutlineCompress style={{color:'whitesmoke'}} size='30px'/></button>
                 </div>
               </div>
-              <ul className='list_decor first_decor_list'>
-              <li className='item_decor' style={{width:'5%'}}></li>
-              <li className='item_decor' style={{width:'10%'}}></li>
-              <li className='item_decor' style={{width:'15%'}}></li>
-              <li className='item_decor' style={{width:'20%'}}></li>
-              <li className='item_decor' style={{width:'25%'}}></li>
-              <li className='item_decor' style={{width:'30%'}}></li>
-              <li className='item_decor' style={{width:'100%'}}></li>
-              </ul>
-              <ul className='list_decor second_decor_list'>
-              <li className='item_decor' style={{width:'5%'}}></li>
-              <li className='item_decor' style={{width:'10%'}}></li>
-              <li className='item_decor' style={{width:'15%'}}></li>
-              <li className='item_decor' style={{width:'20%'}}></li>
-              <li className='item_decor' style={{width:'25%'}}></li>
-              <li className='item_decor' style={{width:'30%'}}></li>
-              <li className='item_decor' style={{width:'100%'}}></li>
-              </ul>
+              <Decor/>
             </div>
           </div>
         </main>
@@ -382,6 +275,3 @@ function handleDescription(action){
 }
 
 export default App;
-// pokemon.sprites.other.showdown.front_default
-// pokemon.sprites.other.dream_world.front_default
-// pokemon.sprites.other['official-artwork'].front_default

@@ -21,7 +21,8 @@
 .list_pok{
     flex-wrap: wrap;
     width: 100%;
-    gap: 3px;
+    gap: 10px;
+    white-space: nowrap;
 }
 
 .item_pok{

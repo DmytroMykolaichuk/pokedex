@@ -4,7 +4,7 @@ import { BsBrowserEdge } from "react-icons/bs";
 import pokeball from '../../img/pokeball.png';
 
 
-export function Evolution({evolPokemons,setQueryPokemon}){
+export function Evolution({evolPokemons,isLoading,setQueryPokemon}){
 
     return(
         <div className='container_evolutions'>
@@ -14,7 +14,10 @@ export function Evolution({evolPokemons,setQueryPokemon}){
             <div className='evolutions_panel flex'>
 
 
-                {!evolPokemons.length && [1,2,3].map((emptyPokeball,indx)=>
+                {isLoading && <div className='isLoadContainer'><img src={pokeball} alt='pokeball'width='120px' height='120px'/></div>}
+
+
+                {!isLoading && !evolPokemons.length && [1,2,3].map((emptyPokeball,indx)=>
                 <div className='evo_item flex' key={emptyPokeball}>
                     <div className='wraper_evol_pok flex'>
                         <img src={pokeball} alt='pokeball'width='120px' height='120px'/>
@@ -24,7 +27,7 @@ export function Evolution({evolPokemons,setQueryPokemon}){
                 </div>)}
 
 
-                {evolPokemons.length!==0 && evolPokemons.length <= 4 &&
+                {!isLoading && evolPokemons.length!==0 && evolPokemons.length <= 4 &&
                 evolPokemons.map((evolution,indx)=>
                 <div className='evo_item flex' key={evolution.name} onClick={()=>setQueryPokemon(evolution.name)}>
                     <div className='wraper_evol_pok flex' 
@@ -40,7 +43,7 @@ export function Evolution({evolPokemons,setQueryPokemon}){
                 </div>)}
 
 
-                {evolPokemons.length > 4 &&
+                {!isLoading && evolPokemons.length > 4 &&
                 <div className='many_evol'>
                 
                     <div className='first_of_many_evol flex' onClick={()=>setQueryPokemon(evolPokemons[0].name)}>

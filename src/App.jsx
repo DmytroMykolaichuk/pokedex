@@ -20,11 +20,12 @@ function App() {
   const [evolPokemons,setEvolPokemons]=useState([])
 
   const[error,setError]=useState(false)
+  const[isLoading,setIsLoading]=useState(false)
 
   useEffect(() =>{
     if(!queryPokemon)return;
 
-    API.getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescriptions,setError)
+    API.getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescriptions,setError,setIsLoading)
 
   },[error, queryPokemon])
 
@@ -53,9 +54,14 @@ function handleKillPokemon(){
               pokemon={pokemon} 
               error={error} 
               handleKillPokemon={handleKillPokemon} 
-              handleSubmit={handleSubmit}/>
+              handleSubmit={handleSubmit}
+              />
               
-              <Evolution evolPokemons={evolPokemons} setQueryPokemon={setQueryPokemon}/>
+              <Evolution 
+              evolPokemons={evolPokemons} 
+              setQueryPokemon={setQueryPokemon} 
+              isLoading={isLoading}
+              />
 
             </div>
 

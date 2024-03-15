@@ -77,3 +77,22 @@ width: 100%;
     box-shadow: 0px 2px 0px var(--secondary-color);
     gap: 10px;
 }
+
+.isLoadContainer{
+border-radius: 50%;
+overflow: hidden;
+animation: pokeballIsLoading 1s linear infinite;
+}
+
+
+@keyframes pokeballIsLoading {
+    0% {
+        transform: translateX(-180px) rotate(0deg);
+    }
+    50% {
+        transform: translateX(180px) rotate(360deg);
+    }
+    100% {
+        transform: translateX(-180px) rotate(720deg);
+    }
+}

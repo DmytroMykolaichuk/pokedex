@@ -17,6 +17,7 @@ function App() {
 
   const [descriptions,setDescriptions]=useState([])
 
+  const [evolutionQuery,setEvolutionQuery]=useState('')
   const [evolPokemons,setEvolPokemons]=useState([])
 
   const[error,setError]=useState(false)
@@ -25,9 +26,9 @@ function App() {
   useEffect(() =>{
     if(!queryPokemon)return;
 
-    API.getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescriptions,setError,setIsLoading)
+    API.getPokemon(queryPokemon,evolutionQuery,setPokemon,setEvolutionQuery,setEvolPokemons,setDescriptions,setError,setIsLoading)
 
-  },[error, queryPokemon])
+  },[ queryPokemon,evolutionQuery])//error
 
 function handleSubmit(e){
     setQueryPokemon(e.target.hero.value.trim().toLowerCase())

@@ -1,50 +1,51 @@
 import axios from 'axios';
 
-async function getPokemon(queryPokemon,error,setPokemon,setEvolPokemons,setDescriptions,setError,setIsLoading){
+async function getPokemon(queryPokemon,evolutionQuery,setPokemon,setEvolutionQuery,setEvolPokemons,setDescriptions,setError,setIsLoading){
 
   try {
-    setIsLoading(true)
     const {data} =await axios.get(`https://pokeapi.co/api/v2/pokemon/${queryPokemon}`)
     setPokemon(data)
 
     const speciesNew =await axios.get(data.species.url)
-    getEvolutionList(speciesNew.data.evolution_chain.url,setEvolPokemons,setIsLoading)
+    const newEvolutionQuery = speciesNew.data.evolution_chain.url
+    if(evolutionQuery !== newEvolutionQuery){
+      setIsLoading(true)
+      setEvolutionQuery(newEvolutionQuery)
+      getEvolutionList(newEvolutionQuery,setEvolPokemons,setIsLoading)
+    }
 
     getPokemonDescriptions(queryPokemon,setDescriptions)
-    
-    if(error)setError(false)
+
+    setError(false)
 
   } catch (error) {
     setPokemon(null)
     setError(true)
     setEvolPokemons([])
+    setEvolutionQuery('')
     setDescriptions([])
-    setIsLoading(false)
     console.log('primary obj pokemon')
   }
   }
 
-  async function getEvolutionList(evolutionQuery,setEvolPokemons,setIsLoading){
+  async function getEvolutionList(newEvolutionQuery,setEvolPokemons,setIsLoading){
     try {
-      const {data:{chain}} = await axios.get(evolutionQuery)
+      const {data:{chain}} = await axios.get(newEvolutionQuery)
       const evol=[]
 
       if(!chain.evolves_to.length){
-          evol.push(chain.species.name)
-          getEvolutionPokemons(evol,setEvolPokemons,setIsLoading)
-
+        evol.push(chain.species.name)
       }else if(chain.evolves_to.length === 1){
         evol.push(chain.species.name)
         chain?.evolves_to[0]?.species?.name && evol.push(chain.evolves_to[0].species.name)
         chain?.evolves_to[0]?.evolves_to[0]?.species?.name && evol.push(chain.evolves_to[0].evolves_to[0].species.name)
-        getEvolutionPokemons(evol,setEvolPokemons,setIsLoading)
-
       }else{
         evol.push(chain.species.name)
         chain.evolves_to.forEach(el=>evol.push(el.species.name))
-        getEvolutionPokemons([...evol],setEvolPokemons,setIsLoading)
       }
+      getEvolutionPokemons(evol,setEvolPokemons,setIsLoading)
     } catch (error) {
+      setIsLoading(false)
       console.log('evolution name arr')
     }
 }
